@@ -3,13 +3,13 @@ import QtQuick.Controls 2.12
 
 RangeSlider {
     id: control
-    from:0.0
-    to:14.0
+    from: 0
+    to: 100
+    first.value: 0
+    second.value: 0
     stepSize: 1
     property string backcolor: "#0e5412"
     property string frontcolor: "#21be2b"
-
-
 
     background: Rectangle {
         x: control.leftPadding
@@ -42,7 +42,7 @@ RangeSlider {
     }
 
     second.handle: Rectangle {
-        id:  righthandle
+        id: righthandle
         x: control.leftPadding + control.second.visualPosition * (control.availableWidth - width)
         y: control.topPadding + control.availableHeight / 2 - height / 2
         implicitWidth: 12
@@ -52,54 +52,61 @@ RangeSlider {
         border.color: "#bdbebf"
     }
 
-
-    function labelCoord()
-    {
-        let coord =control.width/2;
+    function labelCoord() {
+        let coord = control.width / 2
         let min = Math.trunc(first.value)
         let max = Math.trunc(second.value)
-        if( 0.4*to < max  &&max < 0.65*to )
-        {
-            coord = 3* control.width/4
+        if (0.4 * to < max && max < 0.65 * to) {
+            coord = 3 * control.width / 4
+        } else if (0.4 * to < min && min < 0.65 * to) {
+            coord = 1 * control.width / 4
+        } else {
+            coord = control.width / 2 - control.width / 10
         }
-        else
-        if( 0.4*to < min  && min < 0.65*to )
-        {
-            coord = 1* control.width/4
-        }
-        else
-        {
-            coord = control.width/2;
-        }
-        return coord;
+        return coord
     }
 
+    function setFirstValue(variable) {
+        if (second.value < variable) {
+            return false
+        }
+        setValues(variable, second.value)
+        return true
+    }
+
+    function getFirstValue() {
+        return first.value
+    }
+
+    function setSecondValue(variable) {
+        if (first.value > variable) {
+            return false
+        }
+        setValues(first.value, variable)
+        return true
+    }
+
+    function getSecondValue() {
+        return second.value
+    }
     Label {
         id: valLabel
-//        anchors.horizontalCenter: control.horizontalCenter
+        //        anchors.horizontalCenter: control.horizontalCenter
         color: "#d2ff06"
         font.pixelSize: 30
         x: labelCoord()
-//        y: -10
-        text: {            
+        //        y: -10
+        text: {
             let min = first.value
             let max = second.value
-            if( min < 0.01 && 0.99*to < max)
-            {
-                "100%"
-            }else
-            {
-                Number(Math.trunc((second.value-first.value)*100/to)).toString()+"%"
-            }
+            Number(Math.trunc((second.value - first.value))).toString() + "%"
         }
     }
-
-    first.onMoved:  {
-//        console.log(first.value)
-//        console.log(valLabel.x)
-
+    first.onMoved: {
+        console.log(first.value)
+        //        console.log(valLabel.x)
     }
     second.onMoved: {
-//        console.log(second.value)
+        console.log(second.value)
     }
 }

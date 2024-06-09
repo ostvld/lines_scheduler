@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/IntegrityView.qml</file>
+    </qresource>
+</RCC>
