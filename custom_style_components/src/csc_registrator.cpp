@@ -11,6 +11,7 @@ CSCRegistrator::~CSCRegistrator()
 
 void CSCRegistrator::registerTypes(const char* uri)
 {
+    qmlRegisterType<CSCRegistrator>(uri, 1, 0, uri);
     qmlRegisterType(QUrl("qrc:/CSC/BigProgressBar.qml"), uri, 1, 0, "CSCBigProgressBar");
     qmlRegisterType(QUrl("qrc:/CSC/CSCButton.qml"), uri, 1, 0, "CSCButton");
     qmlRegisterType(QUrl("qrc:/CSC/CustomRangeSlider.qml"), uri, 1, 0, "CSCCustomRangeSlider");

@@ -66,6 +66,27 @@ RangeSlider {
         return coord
     }
 
+    Label {
+        id: valLabel
+        //        anchors.horizontalCenter: control.horizontalCenter
+        color: "#d2ff06"
+        font.pixelSize: 30
+        x: labelCoord()
+        //        y: -10
+        text: {
+            let min = first.value
+            let max = second.value
+            Number(Math.trunc((second.value - first.value))).toString() + "%"
+        }
+    }
+    first.onMoved: {
+        console.log(first.value)
+        //        console.log(valLabel.x)
+    }
+    second.onMoved: {
+        console.log(second.value)
+    }
+
     function setFirstValue(variable) {
         if (second.value < variable) {
             return false
@@ -88,25 +109,5 @@ RangeSlider {
 
     function getSecondValue() {
         return second.value
-    }
-    Label {
-        id: valLabel
-        //        anchors.horizontalCenter: control.horizontalCenter
-        color: "#d2ff06"
-        font.pixelSize: 30
-        x: labelCoord()
-        //        y: -10
-        text: {
-            let min = first.value
-            let max = second.value
-            Number(Math.trunc((second.value - first.value))).toString() + "%"
-        }
-    }
-    first.onMoved: {
-        console.log(first.value)
-        //        console.log(valLabel.x)
-    }
-    second.onMoved: {
-        console.log(second.value)
     }
 }

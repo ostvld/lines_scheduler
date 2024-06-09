@@ -1,9 +1,10 @@
 #pragma once
 #include "csc_export.h"
+#include <QObject>
 
 class QQmlEngine;
 
-class CSCRegistrator
+class CSCRegistrator: public QObject
 {
 public:
     ~CSCRegistrator();

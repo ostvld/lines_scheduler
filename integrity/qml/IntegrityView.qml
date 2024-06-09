@@ -81,6 +81,16 @@ Rectangle {
             Layout.row: 3
             Layout.column: 0
         }
+
+        WeekWidget {
+            coreProxy: main.coreProxy
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.columnSpan: 1
+            Layout.rowSpan: 1
+            Layout.row: 4
+            Layout.column: 0
+        }
     }
 
     Connections {
@@ -89,5 +99,10 @@ Rectangle {
             console.log("Core version")
             console.log(coreProxy.coreVersion())
         }
+    }
+
+    Component.onCompleted: {
+        console.log("Core version")
+        console.log(coreProxy.coreVersion())
     }
 }

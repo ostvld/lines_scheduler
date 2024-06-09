@@ -10,6 +10,8 @@ public:
 
   Q_INVOKABLE QString coreVersion();
 
+  Q_INVOKABLE void setInfo(const QString& str);
+
   virtual void libraryRegistration();
 };
 } // namespace core
